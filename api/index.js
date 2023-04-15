@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { Questions } from "../data/Questions.js";
+import { Questions, LoveQuestions } from "../data/Questions.js";
 
 dotenv.config();
 
@@ -25,6 +25,7 @@ const openai = new OpenAIApi(configuration);
 app.post("/", async (req, res) => {
 	const { message } = req.body;
 	const creatorQuestion = Questions;
+	const loveQuestion = LoveQuestions;
 
 	if (creatorQuestion.some((q) => message.toLowerCase().includes(q))) {
 		return res.json({
@@ -33,13 +34,31 @@ app.post("/", async (req, res) => {
 		});
 	}
 
+	if (loveQuestion.some((q) => message.toLowerCase().includes(q))) {
+		return res.json({
+			message:
+				"Francis Tin-ao's love of his life is his girlfriend, Sophia Langanlangan. They have been together for almost 8 years now. Sophia Langanlangan is one of a kind girlfriend that will be always in my creator's heart. He loves him very much",
+		});
+	}
+
 	const response = await openai.createChatCompletion({
 		model: "gpt-3.5-turbo",
 		messages: [{ role: "user", content: message }],
-		max_tokens: 200,
+		max_tokens: 500,
 		temperature: 0.7,
 	});
-	res.json({ message: response.data.choices[0].message.content });
+
+	const formattedMessage = formatMessage(
+		response.data.choices[0].message.content
+	);
+	res.set("Content-Type", "text/html");
+	res.send({ message: formattedMessage });
+
+	function formatMessage(message) {
+		// Add your formatting logic here
+		// Example: replace all "\n" with "<br>"
+		return message.replace(/\n/g, "<br>");
+	}
 });
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
