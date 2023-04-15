@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(
 	cors({
 		origin: "*",
-		method: ["POST", "GET"],
+		method: ["POST"],
 		credentials: true,
 	})
 );
@@ -22,7 +22,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-app.post("/", async (req, res) => {
+app.post("/api/chat", async (req, res) => {
 	const { message } = req.body;
 	const creatorQuestion = Questions;
 	const loveQuestion = LoveQuestions;
@@ -30,7 +30,7 @@ app.post("/", async (req, res) => {
 	if (creatorQuestion.some((q) => message.toLowerCase().includes(q))) {
 		return res.json({
 			message:
-				"Greetings, I am Meep, a smart Artificial Intelligence developed by Francis Tin-ao. I was created to fulfill the requirements of his major subject ITE18. How can I be of assistance to you today?",
+				"Greetings, I am Meep, a smart Chatbot developed by Francis Tin-ao. I was created to fulfill the requirements of his major subject ITE18. How can I be of assistance to you today?",
 		});
 	}
 
@@ -55,8 +55,7 @@ app.post("/", async (req, res) => {
 	res.send({ message: formattedMessage });
 
 	function formatMessage(message) {
-		// Add your formatting logic here
-		// Example: replace all "\n" with "<br>"
+		// replacing all \n escape sequence into a br tag
 		return message.replace(/\n/g, "<br>");
 	}
 });

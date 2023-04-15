@@ -17,8 +17,10 @@ function MessageDialog() {
     setChatLog([...chatLog, { role: "Me", message: `${input}`, time: today.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true})}]);
     setInput("");
     //fetch data
+    const apiUrl = process.env.NODE_ENV === 'production' ? '/api/chat' : 'http://localhost:3001/api/chat';
+
     try {
-      const response = await fetch('http://localhost:3001/', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
