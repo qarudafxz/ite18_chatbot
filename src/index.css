@@ -8,3 +8,28 @@
 body {
   background-color: rgb(32, 32, 32);
 }
+
+.colorChange {
+  animation: colorChange 6s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: red;
+  }
+  20% {
+    color: orange;
+  }
+  40% {
+    color: yellow;
+  }
+  60% {
+    color: green;
+  }
+  80% {
+    color: blue;
+  }
+  100% {
+    color: purple;
+  }
+}
