@@ -8,15 +8,13 @@ function MessageDialog() {
   const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const [ input, setInput ] = useState("");
   const [chatLog, setChatLog] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
 
   const handleInput = async (e) => {
     e.preventDefault();
     //update the chatLog state to map the existing messages and to push the new message
-    setChatLog([...chatLog, { role: "me", message: `${input}`}]);
+    setChatLog([...chatLog, { role: "Me", message: `${input}`}]);
     setInput("");
-    setIsLoading(true);
     //fetch data
     try {
       const response = await fetch('http://localhost:3001/', {
@@ -29,9 +27,8 @@ function MessageDialog() {
         })
       });
     const data = await response.json();
-    setIsLoading(false);
     setChatLog([...chatLog, 
-      { role: "me", message: `${input}` },
+      { role: "Me", message: `${input}` },
       { role: "Meep", message: `${data.message}`}
     ]);
     } catch(err) {
