@@ -6,11 +6,11 @@ function ChatMessage({ message }) {
   const isCodeBlock = message.message.match(/^```[\s\S]*```$/m);
   const messageContent = isCodeBlock ? 
     <pre className="font-main text-white text-sm font-medium">{message.message.slice(3, -3)}</pre>
-    : <p className={`font-main text-white text-sm font-medium ${message.role === "Me" && "colorChange"}`} dangerouslySetInnerHTML={{ __html: message.message.replace(/```([\s\S]*?)```/g, '<pre>$1</pre>').replace(/\n/g, "<br>") }} />;
+    : <p className={`font-main text-white text-sm font-medium`} dangerouslySetInnerHTML={{ __html: message.message.replace(/```([\s\S]*?)```/g, '<pre>$1</pre>').replace(/\n/g, "<br>") }} />;
   
   return (  
     <div>
-      <div className={`flex flex-row gap-4 items-center ${message.role === "Meep" && "bg-[#414141] rounded-3xl p-4"}`}>
+      <div className={`flex flex-row gap-4 items-center ${message.role === "MIIP" && "bg-[#414141] rounded-3xl p-4"}`}>
         <div
           className={`flex items-center justify-center ${
             message.role === "Meep" ? "bg-slate-700  border border-[#0b141a]" : "bg-[#646464] ml-4"

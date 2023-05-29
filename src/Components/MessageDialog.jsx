@@ -51,14 +51,22 @@ function MessageDialog() {
   }, [chatLog]);
 
   return (
-    <div className="flex flex-col bg-[#494949] w-9/12 m-auto my-24 rounded-md overflow-y-auto qdialog" style={{height: "650px"}}>
+    <div className="flex flex-col bg-[#494949] w-9/12 m-auto my-24 rounded-md overflow-y-auto qdialog" style={{height: "300px"}}>
       <div className="flex flex-row justify-between items-center px-4 py-2 shadow-xl">
-        <h1 className="font-main text-white text-2xl tracking-wide font-black">Meep ChatBot</h1>
+        <h1 className="font-main text-white text-2xl tracking-wide font-black">NoteSummarizer</h1>
         <div className="flex flex-row gap-5 items-center">
           <p className="font-main text-white text-sm tracking-wide font-medium">{date + " | " + time}</p>
           <ClearDialog setChatLog={setChatLog}/>  
         </div>
       </div>
+
+      <div className="flex flex-col bg-[#494949] w-9/12 m-auto my-24 rounded-md overflow-y-auto qdialog" style={{height: "300px"}}>
+      <div className="flex flex-row justify-between items-center px-4 py-2 shadow-xl">
+        <h1 className="font-main text-white text-2xl tracking-wide font-black">NoteSummarizer</h1>
+        <div className="flex flex-row gap-5 items-center">
+        </div>
+      </div>
+
       {/* This is for the messages */}
       <div style={{maxHeight: "70vh", overflow: "auto"}}>
         <div className="flex flex-col items-left px-4 py-2 max-h-main gap-8">
